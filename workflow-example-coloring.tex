@@ -1,39 +1,27 @@
 % ----------------------------------------------------------------------
-\begin{frame}[c]{A case-study: Graph coloring}
-  \begin{center}
-    \small
-    \setlength{\unitlength}{.75pt}
-    \begin{picture}(420,200)(-210,-35)
-      \put(-200,110){\alert{\framebox(80,40){\textbf{Problem}}}}
-      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
-      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
-      \put(  20,-15){{\framebox(60,30){{Solver}}}}
-      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
-      \put( 120,110){\framebox(80,40){Solution}}
-      \put(-120,0){\vector(1,0){40}}
-      \put( -20,0){\vector(1,0){40}}
-      \put(  80,0){\vector(1,0){40}}
-      \put(-160,110){\vector(0,-1){90}}
-      \put( 160, 20){\vector(0, 1){90}}
-      \put(-217, 62.5){{\emph{Modeling}}}
-      \put( 165, 62.5){{\emph{Interpreting}}}
-      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
-    \end{picture}
-  \end{center}
-\end{frame}
+% \input{motivation/workflow}
+\input{modeling/workflow}
+% \input{modeling/workflow-problem}
+% \input{modeling/workflow-logic-program}
+% \input{modeling/workflow-grounding}
+% \input{modeling/workflow-solving}
+% \input{modeling/workflow-stable-models}
+% \input{modeling/workflow-solution}
 % ----------------------------------------------------------------------
-\begin{frame}{Graph coloring}
+\begin{frame}{A case-study: Graph coloring}
   \bigskip
   \begin{itemize}
   \item<2-> \structure{Problem instance} \ A graph consisting of nodes and edges
-    \begin{itemize}
+    \begin{itemize}\normalsize
     \item<visible@4-> facts formed by predicates \texttt{node/1} and \texttt{edge/2}
     \item<only@5->    facts formed by predicate  \texttt{color/1}
     \end{itemize}
+    \medskip
   \item<only@6-> \structure{Problem class} \ Assign each node one color such that no two nodes connected
     by an edge have the same color
+    \medskip
   \item<only@7-> [] In other words,
-    \begin{enumerate}
+    \begin{enumerate}\normalsize
     \item Each node has one color
     \item Two connected nodes must not have the same color
     \end{enumerate}
@@ -42,28 +30,7 @@
   \only<3,4>{\vfill\input{modeling/figures/fig-graph}}
 \end{frame}
 % ----------------------------------------------------------------------
-\begin{frame}[c]{ASP solving process}
-  \begin{center}
-    \small
-    \setlength{\unitlength}{.75pt}
-    \begin{picture}(420,200)(-210,-35)
-      \put(-200,110){{\framebox(80,40){Problem}}}
-      \put(-200,-20){\alert{\framebox(80,40){\shortstack{\textbf{Logic}\\\textbf{Program}}}}}
-      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
-      \put(  20,-15){{\framebox(60,30){{Solver}}}}
-      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
-      \put( 120,110){\framebox(80,40){Solution}}
-      \put(-120,0){\vector(1,0){40}}
-      \put( -20,0){\vector(1,0){40}}
-      \put(  80,0){\vector(1,0){40}}
-      \put(-160,110){\vector(0,-1){90}}
-      \put( 160, 20){\vector(0, 1){90}}
-      \put(-217, 62.5){{\emph{Modeling}}}
-      \put( 165, 62.5){{\emph{Interpreting}}}
-      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
-    \end{picture}
-  \end{center}
-\end{frame}
+\input{modeling/workflow-logic-program}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile]{Graph coloring}
 \pause
@@ -113,28 +80,7 @@ color(r).   color(b).   color(g).
 \bigskip
 \end{frame}
 % ----------------------------------------------------------------------
-\begin{frame}[c]{ASP solving process}
-  \begin{center}
-    \small
-    \setlength{\unitlength}{.75pt}
-    \begin{picture}(420,200)(-210,-35)
-      \put(-200,110){{\framebox(80,40){Problem}}}
-      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
-      \put(-80,-15){\alert{\framebox(60,30){\textbf{Grounder}}}}
-      \put(  20,-15){{\framebox(60,30){{Solver}}}}
-      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
-      \put( 120,110){\framebox(80,40){Solution}}
-      \put(-120,0){\vector(1,0){40}}
-      \put( -20,0){\vector(1,0){40}}
-      \put(  80,0){\vector(1,0){40}}
-      \put(-160,110){\vector(0,-1){90}}
-      \put( 160, 20){\vector(0, 1){90}}
-      \put(-217, 62.5){{\emph{Modeling}}}
-      \put( 165, 62.5){{\emph{Interpreting}}}
-      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
-    \end{picture}
-  \end{center}
-\end{frame}
+\input{modeling/workflow-grounding}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile,shrink=1]{Graph coloring: Grounding}
 %
@@ -165,28 +111,7 @@ color(r).  color(b).  color(g).
 \end{semiverbatim}
 \end{frame}
 % ----------------------------------------------------------------------
-\begin{frame}[c]{ASP solving process}
-  \begin{center}
-    \small
-    \setlength{\unitlength}{.75pt}
-    \begin{picture}(420,200)(-210,-35)
-      \put(-200,110){{\framebox(80,40){Problem}}}
-      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
-      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
-      \put(  20,-15){\alert{\framebox(60,30){\textbf{Solver}}}}
-      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
-      \put( 120,110){\framebox(80,40){Solution}}
-      \put(-120,0){\vector(1,0){40}}
-      \put( -20,0){\vector(1,0){40}}
-      \put(  80,0){\vector(1,0){40}}
-      \put(-160,110){\vector(0,-1){90}}
-      \put( 160, 20){\vector(0, 1){90}}
-      \put(-217, 62.5){{\emph{Modeling}}}
-      \put( 165, 62.5){{\emph{Interpreting}}}
-      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
-    \end{picture}
-  \end{center}
-\end{frame}
+\input{modeling/workflow-solving}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile,shrink=1]{Graph coloring: Solving}
 %
@@ -216,28 +141,7 @@ Time        : 0.002s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
 \end{semiverbatim}
 \end{frame}
 % ----------------------------------------------------------------------
-\begin{frame}[c]{ASP solving process}
-  \begin{center}
-    \small
-    \setlength{\unitlength}{.75pt}
-    \begin{picture}(420,200)(-210,-35)
-      \put(-200,110){{\framebox(80,40){Problem}}}
-      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
-      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
-      \put(  20,-15){{\framebox(60,30){{Solver}}}}
-      \put( 120,-20){\alert{\framebox(80,40){\shortstack{\textbf{Stable}\\\textbf{Models}}}}}
-      \put( 120,110){\alert{\framebox(80,40){Solution}}}
-      \put(-120,0){\vector(1,0){40}}
-      \put( -20,0){\vector(1,0){40}}
-      \put(  80,0){\vector(1,0){40}}
-      \put(-160,110){\vector(0,-1){90}}
-      \put( 160, 20){\vector(0, 1){90}}
-      \put(-217, 62.5){{\emph{Modeling}}}
-      \put( 165, 62.5){{\emph{Interpreting}}}
-      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
-    \end{picture}
-  \end{center}
-\end{frame}
+\input{modeling/workflow-stable-models}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile]{A coloring}
 \footnotesize
@@ -253,7 +157,9 @@ node(1)   [...]    \\
 \end{center}
 \end{frame}
 % ----------------------------------------------------------------------
-%
+\input{modeling/workflow-solution}
+% ----------------------------------------------------------------------
+\%
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../../main"
