@@ -1,0 +1,28 @@
+\begin{frame}[c]{ASP solving process}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){\alert<1>{\framebox(80,40){Problem}}}
+      \put(-200,-20){\alert<2,6,7>{\framebox(80,40){\shortstack{\textbf<2>{Logic}\\\textbf<2>{Program}}}}}
+      \put(-80,-15){\alert<3,4,6>{\framebox(60,30){\textbf<3>{Grounder}}}}
+      \put(  20,-15){\alert<3,4,6>{\framebox(60,30){\textbf<4>{Solver}}}}
+      \put( 120,-20){\alert<5,6,7>{\framebox(80,40){\shortstack{\textbf<5>{Stable}\\\textbf<5>{Models}}}}}
+      \put( 120,110){\framebox(80,40){Solution}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){\alert<2>{\emph{Modeling}}}
+      \put( 165, 62.5){\alert<5>{\emph{Interpreting}}}
+      \put(   0,-32.5){\alert<3,4,6>{\makebox(0,0){\emph{Solving}}}}
+      \only<7>{
+      \put(-160,-50){\vector(0, 1){30}}
+      \put( 160,-20){\line(0,-1){30}}
+      \put(-160,-50){\line(1,0){320}}
+      \put(   0,-65){\alert<7>{\makebox(0,0){\emph{Elaborating}}}}
+      }
+    \end{picture}
+  \end{center}
+\end{frame}

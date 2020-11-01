@@ -1,0 +1,54 @@
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Graph coloring}
+\[
+\left.
+\begin{minipage}{0.72\linewidth}
+\begin{semiverbatim}
+node(1..6).
+
+edge(1,2).  edge(1,3).  edge(1,4).
+edge(2,4).  edge(2,5).  edge(2,6).
+edge(3,1).  edge(3,4).  edge(3,5).
+edge(4,1).  edge(4,2).
+edge(5,3).  edge(5,4).  edge(5,6).
+edge(6,2).  edge(6,3).  edge(6,5).
+
+color(r).   color(b).   color(g).
+\end{semiverbatim}
+\end{minipage}
+\right\}
+\begin{array}[c]{l}
+\alt<2->{\alert{\large\alert{\textbf{Data}}}}{%
+\text{\large\textbf{Problem}}\\
+\text{\large\textbf{instance}}}
+\end{array}
+\]
+\bigskip
+\[
+\left.
+\begin{minipage}{0.72\linewidth}
+\begin{semiverbatim}
+\{ assign(N,C) : color(C) \} = 1 :- node(N).
+
+:- edge(N,M), assign(N,C), assign(M,C).
+\end{semiverbatim}
+\end{minipage}
+\right\}
+\begin{array}[c]{l}
+  \alt<3->%
+  {%
+  \text{\large\alert{\textbf{Generator}}}\\[-1.5pt]\\
+  \text{\large\alert{\textbf{Tester}}}}
+  {%
+  \text{\large\textbf{Problem}}\\
+  \text{\large\textbf{encoding}}}
+\end{array}
+\]
+\bigskip
+\end{frame}
+% ----------------------------------------------------------------------
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "asp"
+%%% End:

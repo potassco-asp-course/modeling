@@ -1,0 +1,259 @@
+% ----------------------------------------------------------------------
+\begin{frame}[c]{A case-study: Graph coloring}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){\alert{\framebox(80,40){\textbf{Problem}}}}
+      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
+      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
+      \put(  20,-15){{\framebox(60,30){{Solver}}}}
+      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
+      \put( 120,110){\framebox(80,40){Solution}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){{\emph{Modeling}}}
+      \put( 165, 62.5){{\emph{Interpreting}}}
+      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
+    \end{picture}
+  \end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}{Graph coloring}
+  \bigskip
+  \begin{itemize}
+  \item<2-> \structure{Problem instance} \ A graph consisting of nodes and edges
+    \begin{itemize}
+    \item<visible@4-> facts formed by predicates \texttt{node/1} and \texttt{edge/2}
+    \item<only@5->    facts formed by predicate  \texttt{color/1}
+    \end{itemize}
+  \item<only@6-> \structure{Problem class} \ Assign each node one color such that no two nodes connected
+    by an edge have the same color
+  \item<only@7-> [] In other words,
+    \begin{enumerate}
+    \item Each node has one color
+    \item Two connected nodes must not have the same color
+    \end{enumerate}
+  \end{itemize}
+  \centering
+  \only<3,4>{\vfill\input{modeling/fig_graph}}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[c]{ASP solving process}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){{\framebox(80,40){Problem}}}
+      \put(-200,-20){\alert{\framebox(80,40){\shortstack{\textbf{Logic}\\\textbf{Program}}}}}
+      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
+      \put(  20,-15){{\framebox(60,30){{Solver}}}}
+      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
+      \put( 120,110){\framebox(80,40){Solution}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){{\emph{Modeling}}}
+      \put( 165, 62.5){{\emph{Interpreting}}}
+      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
+    \end{picture}
+  \end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Graph coloring}
+\pause
+\[
+\uncover<5,9->{\left.}
+\begin{minipage}{0.72\linewidth}
+\begin{semiverbatim}
+node(1..6).
+\pause
+edge(1,2).  edge(1,3).  edge(1,4).
+edge(2,4).  edge(2,5).  edge(2,6).
+edge(3,1).  edge(3,4).  edge(3,5).
+edge(4,1).  edge(4,2).
+edge(5,3).  edge(5,4).  edge(5,6).
+edge(6,2).  edge(6,3).  edge(6,5).
+\pause
+color(r).   color(b).   color(g).
+\end{semiverbatim}
+\end{minipage}
+\uncover<5,9->{\right\}}
+\begin{array}[c]{l}
+\only<-9>{%
+\uncover<5,9>{\alert<5>{\text{\large\textbf<5>{Problem}}}}\\
+\uncover<5,9>{\alert<5>{\text{\large\textbf<5>{instance}}}}}
+\only<10>{\alert{\texttt{graph.lp}}}
+\end{array}
+\]
+\pause[6]
+\bigskip
+\[
+\uncover<8->{\left.}
+\begin{minipage}{0.72\linewidth}
+\begin{semiverbatim}
+\{ assign(N,C) : color(C) \} = 1 :- node(N).
+\pause
+:- edge(N,M), assign(N,C), assign(M,C).
+\end{semiverbatim}
+\end{minipage}
+\uncover<8->{\right\}}
+\begin{array}[c]{l}
+\only<-9>{%
+\uncover<8,9>{\alert<8>{\text{\large\textbf<8>{Problem}}}}\\
+\uncover<8,9>{\alert<8>{\text{\large\textbf<8>{encoding}}}}}
+\only<10>{\alert{\texttt{color.lp}}}
+\end{array}
+\]
+\bigskip
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[c]{ASP solving process}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){{\framebox(80,40){Problem}}}
+      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
+      \put(-80,-15){\alert{\framebox(60,30){\textbf{Grounder}}}}
+      \put(  20,-15){{\framebox(60,30){{Solver}}}}
+      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
+      \put( 120,110){\framebox(80,40){Solution}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){{\emph{Modeling}}}
+      \put( 165, 62.5){{\emph{Interpreting}}}
+      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
+    \end{picture}
+  \end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink=1]{Graph coloring: Grounding}
+%
+\mbox{\Large\texttt{\$ \alt<5>{clingo}{gringo} --text graph.lp color.lp }}
+\pause
+\begin{semiverbatim}
+node(1).  node(2).  node(3).  node(4).  node(5).  node(6).
+
+edge(1,2).  edge(2,4).  edge(3,1).  edge(4,1).  edge(5,3).  edge(6,2).
+edge(1,3).  edge(2,5).  edge(3,4).  edge(4,2).  edge(5,4).  edge(6,3).
+edge(1,4).  edge(2,6).  edge(3,5).              edge(5,6).  edge(6,5).
+
+color(r).  color(b).  color(g).
+\pause
+\{\,assign(1,r);\,assign(1,b);\,assign(1,g)\,\} = 1. \{\,assign(4,r);\,assign(4,b);\,assign(4,g)\,\} = 1.
+\{\,assign(2,r);\,assign(2,b);\,assign(2,g)\,\} = 1. \{\,assign(5,r);\,assign(5,b);\,assign(5,g)\,\} = 1.
+\{\,assign(3,r);\,assign(3,b);\,assign(3,g)\,\} = 1. \{\,assign(6,r);\,assign(6,b);\,assign(6,g)\,\} = 1.
+\pause
+:- assign(1,r),\,assign(2,r).  :- assign(2,r),\,assign(4,r). [...] :- assign(6,r),\,assign(2,r).
+:- assign(1,b),\,assign(2,b).  :- assign(2,b),\,assign(4,b).       :- assign(6,b),\,assign(2,b).
+:- assign(1,g),\,assign(2,g).  :- assign(2,g),\,assign(4,g).       :- assign(6,g),\,assign(2,g).
+:- assign(1,r),\,assign(3,r).  :- assign(2,r),\,assign(5,r).       :- assign(6,r),\,assign(3,r).
+:- assign(1,b),\,assign(3,b).  :- assign(2,b),\,assign(5,b).       :- assign(6,b),\,assign(3,b).
+:- assign(1,g),\,assign(3,g).  :- assign(2,g),\,assign(5,g).       :- assign(6,g),\,assign(3,g).
+:- assign(1,r),\,assign(4,r).  :- assign(2,r),\,assign(6,r).       :- assign(6,r),\,assign(5,r).
+:- assign(1,b),\,assign(4,b).  :- assign(2,b),\,assign(6,b).       :- assign(6,b),\,assign(5,b).
+:- assign(1,g),\,assign(4,g).  :- assign(2,g),\,assign(6,g).       :- assign(6,g),\,assign(5,g).
+\end{semiverbatim}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[c]{ASP solving process}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){{\framebox(80,40){Problem}}}
+      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
+      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
+      \put(  20,-15){\alert{\framebox(60,30){\textbf{Solver}}}}
+      \put( 120,-20){{\framebox(80,40){\shortstack{{Stable}\\{Models}}}}}
+      \put( 120,110){\framebox(80,40){Solution}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){{\emph{Modeling}}}
+      \put( 165, 62.5){{\emph{Interpreting}}}
+      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
+    \end{picture}
+  \end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink=1]{Graph coloring: Solving}
+%
+\mbox{\Large\texttt{\$ \alt<3>{clingo}{gringo} graph.lp color.lp\only<-2>{ | clasp} 0}}
+\pause
+\begin{semiverbatim}
+clasp version 2.1.0
+Reading from stdin
+Solving...
+Answer: 1
+node(1) [...] \alert{assign(6,b) assign(5,g) assign(4,b) assign(3,r) assign(2,r) assign(1,g)}
+Answer: 2
+node(1) [...] \alert{assign(6,r) assign(5,g) assign(4,r) assign(3,b) assign(2,b) assign(1,g)}
+Answer: 3
+node(1) [...] \alert{assign(6,g) assign(5,b) assign(4,g) assign(3,r) assign(2,r) assign(1,b)}
+Answer: 4
+node(1) [...] \alert{assign(6,r) assign(5,b) assign(4,r) assign(3,g) assign(2,g) assign(1,b)}
+Answer: 5
+node(1) [...] \alert{assign(6,g) assign(5,r) assign(4,g) assign(3,b) assign(2,b) assign(1,r)}
+Answer: 6
+node(1) [...] \alert{assign(6,b) assign(5,r) assign(4,b) assign(3,g) assign(2,g) assign(1,r)}
+SATISFIABLE
+
+Models      : 6
+Time        : 0.002s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+
+\end{semiverbatim}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[c]{ASP solving process}
+  \begin{center}
+    \small
+    \setlength{\unitlength}{.75pt}
+    \begin{picture}(420,200)(-210,-35)
+      \put(-200,110){{\framebox(80,40){Problem}}}
+      \put(-200,-20){{\framebox(80,40){\shortstack{{Logic}\\{Program}}}}}
+      \put(-80,-15){{\framebox(60,30){{Grounder}}}}
+      \put(  20,-15){{\framebox(60,30){{Solver}}}}
+      \put( 120,-20){\alert{\framebox(80,40){\shortstack{\textbf{Stable}\\\textbf{Models}}}}}
+      \put( 120,110){\alert{\framebox(80,40){Solution}}}
+      \put(-120,0){\vector(1,0){40}}
+      \put( -20,0){\vector(1,0){40}}
+      \put(  80,0){\vector(1,0){40}}
+      \put(-160,110){\vector(0,-1){90}}
+      \put( 160, 20){\vector(0, 1){90}}
+      \put(-217, 62.5){{\emph{Modeling}}}
+      \put( 165, 62.5){{\emph{Interpreting}}}
+      \put(   0,-32.5){{\makebox(0,0){\emph{Solving}}}}
+    \end{picture}
+  \end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{A coloring}
+\footnotesize
+\begin{semiverbatim}
+Answer: 6
+node(1)   [...]    \\
+\alert{assign(6,b) assign(5,r) assign(4,b) assign(3,g) assign(2,g) assign(1,r)}
+\end{semiverbatim}
+\pause
+\medskip
+\begin{center}
+\input{modeling/fig_graph_colored}
+\end{center}
+\end{frame}
+% ----------------------------------------------------------------------
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../asp"
+%%% End:
