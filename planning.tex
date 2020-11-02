@@ -1,0 +1,55 @@
+% ---------------------------------------------------------------------
+\begin{frame}{Simplified STRIPS\footnote{Stanford Research Institute Problem Solver, 1971} Planning}
+
+  \begin{itemize}
+  \item<2-> \structure{Problem Instance}
+    \begin{itemize}
+    \item set of fluents
+    \item initial and goal state
+    \item set of actions, consisting of pre- and postconditions
+    \item number $k$ of allowed actions
+    \end{itemize}
+  \item<2-> \structure{Problem Class}
+    Find a plan, that is, a sequence of $k$ actions leading from the initial state to the goal state
+    \smallskip
+  \item<3-> \structure{Example}
+    \begin{itemize}
+    \item fluents       \ $\{p,q,r\}$
+    \item initial state \ $\{p\}$
+    \item goal state    \ $\{r\}$
+    \item actions       \ $a = (\{p\},\{q,\neg p\})$ and $b = (\{q\},\{r,\neg q\})$
+    \item length        \ 2
+      \medskip
+    \item<4-> plan      \ $\langle a, b \rangle$
+    \end{itemize}
+    \medskip
+  \end{itemize}
+
+\end{frame}
+% ---------------------------------------------------------------------
+\begin{frame}[fragile,shrink=1]{Simplistic STRIPS Planning}
+\begin{semiverbatim}
+time(1..k).
+\pause
+fluent(p).     action(a).     action(b).       init(p).
+fluent(q).        pre(a,p).      pre(b,q).
+fluent(r).        add(a,q).      add(b,r).     query(r).
+                  del(a,p).      del(b,q).
+\pause
+holds(P,0) :- init(P).
+
+\{ occ(A,T) : action(A) \} = 1 :- time(T).
+:- occ(A,T), pre(A,F), not holds(F,T-1).
+
+holds(F,T) :- occ(A,T), add(A,F).
+holds(F,T) :- holds(F,T-1), time(T), not occ(A,T) : del(A,F).
+\pause
+:- query(F), not holds(F,k).
+\end{semiverbatim}
+\end{frame}
+% ------------------------------------------------------------
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../main"
+%%% End:

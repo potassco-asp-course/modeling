@@ -1,0 +1,61 @@
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink]{Reviewer Assignment}
+
+  \bigskip
+
+  \begin{itemize}
+  \item<1-> \structure{Problem Instance}
+    A set of papers and a set of reviewers along with their first and second choices of papers and conflict of interests
+    \medskip
+  \item<1-> \structure{Problem Class}
+    A \alert<2>{\only<2>{``}nice\only<2>{''}} assignment of three reviewers to each paper
+  \end{itemize}
+
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink=1]{Reviewer Assignment\\[-8pt]\footnotesize by Ilkka Niemelä}
+\begin{semiverbatim}
+paper(p1).  reviewer(r1). classA(r1,p1). classB(r1,p2). coi(r1,p3).
+paper(p2).  reviewer(r2). classA(r2,p3). classB(r2,p4). coi(r2,p6).
+[...]
+\pause
+\{ assigned(P,R) : reviewer(R) \} = 3 :-  paper(P).
+\pause
+ :- assigned(P,R), coi(R,P).
+ :- assigned(P,R), not classA(R,P), not classB(R,P).
+ :- not 6 \{ assigned(P,R) : paper(P) \} 9, reviewer(R).
+\pause
+assignedB(P,R) :-  classB(R,P), assigned(P,R).
+ :- 3 \{ assignedB(P,R) : paper(P) \}, reviewer(R).
+\pause
+#minimize \{ 1,P,R : assignedB(P,R), paper(P), reviewer(R) \}.
+
+
+\end{semiverbatim}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink=1]{Reviewer Assignment\\[-8pt]\footnotesize by Ilkka Niemelä}
+\begin{semiverbatim}
+reviewer(r1). paper(p1). classA(r1,p1). classB(r1,p2). coi(r1,p3).
+reviewer(r2). paper(p2). classA(r1,p3). classB(r1,p4). coi(r1,p6).
+[...]
+
+\alert<2>{#count} \{ \alert<2>{P,R :} assigned(P,R) \alert<2>{:} reviewer(R) \} = 3 :-  paper(P).
+
+ :- assigned(P,R), coi(R,P).
+ :- assigned(P,R), not classA(R,P), not classB(R,P).
+ :- not 6 \alert<2>{<= #count} \{ \alert<2>{P,R :} assigned(P,R)\alert<2>{,} paper(P) \} \alert<2>{<= 9}, reviewer(R).
+
+assignedB(P,R) :-  classB(R,P), assigned(P,R).
+ :- 3 \alert<2>{<= #count} \{ \alert<2>{P,R :} assignedB(P,R), paper(P) \}, reviewer(R).
+
+#minimize \{ 1,P,R : assignedB(P,R), paper(P), reviewer(R) \}.
+
+
+\end{semiverbatim}
+\end{frame}
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../main"
+%%% End:

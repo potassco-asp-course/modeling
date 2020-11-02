@@ -1,0 +1,47 @@
+% ----------------------------------------------------------------------
+\begin{frame}{Traveling salesperson}
+\only<3->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tsp.lp}}
+%
+%\only<4->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspO.lp}}
+\only<4->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspWC.lp}}%
+\only<5>{%
+  \begin{picture}(0,0)(0,-2)
+    \put(0,0){\line(1,0){310}}
+    \put(280, 6){\footnotesize \makebox(30,0)[r]{\texttt{\alert{tsp.lp}}}}
+    \put(280,-6){\footnotesize \makebox(30,0)[r]{\texttt{\alert{cities.lp}}}}
+  \end{picture}}%
+\uncover<2,5>{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspI.lp}}%
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink]{Running salesperson}
+\begin{lstlisting}[escapechar=!]
+$ clingo tsp.lp cities.lp
+clingo version 5.3.1
+Reading...
+Solving...
+Answer: 1
+start(a) [...] road(c,a,35)
+!\color{yellow}{travel(a,b) travel(b,d) travel(d,c) travel(c,a)}!
+visited(b) visited(c) visited(d) visited(a)
+Optimization: !\color{yellow}{100}!
+Answer: 2
+start(a) [...] road(c,a,35)
+!\color{green}{travel(a,b) travel(b,c) travel(c,d) travel(d,a)}!
+visited(b) visited(c) visited(d) visited(a)
+Optimization: !\color{green}{95}!
+OPTIMUM FOUND
+
+Models       : 2
+  Optimum    : yes
+Optimization : 95
+Calls        : 1
+Time         : 0.005s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.002s
+\end{lstlisting}
+\end{frame}
+% ----------------------------------------------------------------------
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../main"
+%%% End:
