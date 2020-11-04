@@ -1,34 +1,51 @@
 % ----------------------------------------------------------------------
-\begin{frame}{Traveling salesperson}
-\only<3->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tsp.lp}}
+\begin{frame}[c]{The traveling salesperson problem (TSP)}
+  \begin{itemize}
+  \item \structure{Problem Instance} A set of cities and distances among them,
+
+    or simply a weighted graph
+    \smallskip
+  \item \structure{Problem Class} What is the shortest possible route visiting each city once and returning to the city of origin?
+    \bigskip
+  \item<2-> \structure{Note}
+    \begin{itemize}
+    \item TSP extends the Hamiltonian cycle problem:
+      \par
+      Is there a cycle in a graph visiting each node exactly once
+      \smallskip
+    \item TSP is relevant to applications in logistics, planning, chip design,
+      and the core of the vehicle routing problem
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Problem instance, \texttt{cities.lp}}
+\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspI.lp}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Problem encoding, \texttt{tsp.lp}}
+\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tsp.lp}
 %
-%\only<4->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspO.lp}}
-\only<4->{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspWC.lp}}%
-\only<5>{%
-  \begin{picture}(0,0)(0,-2)
-    \put(0,0){\line(1,0){310}}
-    \put(280, 6){\footnotesize \makebox(30,0)[r]{\texttt{\alert{tsp.lp}}}}
-    \put(280,-6){\footnotesize \makebox(30,0)[r]{\texttt{\alert{cities.lp}}}}
-  \end{picture}}%
-\uncover<2,5>{\lstinputlisting[basicstyle=\ttfamily\footnotesize]{encodings/tspI.lp}}%
+\only<2>{\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspWC.lp}}
+\only<3>{\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspO.lp}}
 \end{frame}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile,shrink]{Running salesperson}
 \begin{lstlisting}[escapechar=!]
-$ clingo tsp.lp cities.lp
+$ clingo tsp.lp cities.lp!\pause!
 clingo version 5.3.1
 Reading...
-Solving...
+Solving...!\pause!
 Answer: 1
 start(a) [...] road(c,a,35)
 !\color{yellow}{travel(a,b) travel(b,d) travel(d,c) travel(c,a)}!
 visited(b) visited(c) visited(d) visited(a)
-Optimization: !\color{yellow}{100}!
+Optimization: !\color{yellow}{100}!!\pause!
 Answer: 2
 start(a) [...] road(c,a,35)
 !\color{green}{travel(a,b) travel(b,c) travel(c,d) travel(d,a)}!
 visited(b) visited(c) visited(d) visited(a)
-Optimization: !\color{green}{95}!
+Optimization: !\color{green}{95}!!\pause!
 OPTIMUM FOUND
 
 Models       : 2
@@ -38,6 +55,10 @@ Calls        : 1
 Time         : 0.005s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
 CPU Time     : 0.002s
 \end{lstlisting}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Alternative problem encoding}
+\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tsp-compact.lp}
 \end{frame}
 % ----------------------------------------------------------------------
 %
