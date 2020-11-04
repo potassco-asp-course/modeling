@@ -1,44 +1,48 @@
 % ----------------------------------------------------------------------
-\begin{frame}[c]{Satisfiability testing}
+\begin{frame}[fragile]{Satisfiability testing}
 
   \begin{itemize}
-  \item \structure{Problem Instance} A propositional formula $\phi$ in CNF
-  \item \structure{Problem Class} Is there an assignment of propositional variables to true
+  \item<1-> \structure{Problem Instance} \ A propositional formula $\phi$ in CNF
+  \item<1-> \structure{Problem Class}    \ Is there an assignment of propositional variables to true
     and false such that a given formula $\phi$ is true
 
-    \pause
-    \bigskip
+    \smallskip
 
-  \item \structure{Example:} Consider formula
+  \item<2-> \structure{Example} \ Consider formula
     \[
-    \alert<4>{(a\vee\neg b)}\wedge\alert<5>{(\neg a\vee b)}
+      \alt<6>{(\neg a\wedge b\to\bot)\wedge (a\wedge\neg b\to\bot)}%
+             {\alt<5>{\neg(\neg a\wedge b)\wedge\neg(a\wedge\neg b)}%
+                     {(a\vee\neg b)\wedge(\neg a\vee b)}}
     \]
 
-  \item \structure{Logic Program} \ \bigskip
-    \begin{center}
+  \item<3-> \structure{Logic Program}
+    \smallskip
+
     \begin{tabular}{lp{0em}lp{1em}l}
       \text{\textbf{Generator}}
       &&
       \text{\textbf{Tester}}
       &&
       \text{\textbf{Stable models}}
-      \\
-      \begin{tabular}[t]{lcl}
-        \alert<3>{$\{\,a\,\}$}    &\alert<3>{$\leftarrow$}&\\
-        \alert<3>{$\{\,b\,\}$}    &\alert<3>{$\leftarrow$}&
+      \\[3pt]
+      \begin{tabular}[t]{l}
+        \texttt{\{a\}.}\\
+        \texttt{\{b\}.}
       \end{tabular}
       &&
-      \begin{tabular}[t]{cl}
-        \alert<4>{$\leftarrow$}&\alert<4>{$\neg a,     b $}\\
-        \alert<5>{$\leftarrow$}&\alert<5>{$     a, \neg b$}
+      \begin{tabular}[t]{l}
+        \texttt{:- not a,     b.}\\
+        \texttt{:-     a, not b.}
       \end{tabular}
       &&
       \begin{tabular}[t]{rcl}
-        X$_1$&=&$\{a,b\}$\\
-        X$_2$&=&$\{   \}$
+        $X_1$&=&$\{\mathtt{a},\mathtt{b}\}$\\
+        $X_2$&=&$\{                     \}$
       \end{tabular}
     \end{tabular}
-    \end{center}
+    \medskip
+  \item<4->  \structure{Note} \ The generator puts \texttt{a} and \texttt{b} under the open world assumption
+  \item<4->[]  \phantom{Note} \ The tester eliminates interpretations; it is expressed negatively
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
