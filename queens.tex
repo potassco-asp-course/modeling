@@ -5,18 +5,21 @@
     \column{0.35\textwidth}
     \chessboard[maxfield=e5, labelbottomformat=\arabic{filelabel}, showmover=false, setpieces={}] \\
     \column{0.65\textwidth}
-    \bigskip
+    \medskip
     \begin{itemize}
     \item Place $n$ queens on an $n\times{n}$ chess board
     \item Queens must not attack one another
+      \medskip
+    \item \structure{Example} \ $n=5$
+      \par
+      \bigskip
+      {\huge
+        \begin{tabular}{lll}
+          \figsymbol{Q} & \figsymbol{Q} & \figsymbol{Q} \\
+          \figsymbol{Q} & \figsymbol{Q} & \\
+        \end{tabular}
+      }
     \end{itemize}
-    \bigskip\quad
-    {\huge
-      \begin{tabular}{lll}
-        \figsymbol{Q} & \figsymbol{Q} & \figsymbol{Q} \\
-        \figsymbol{Q} & \figsymbol{Q} & \\
-      \end{tabular}
-    }
   \end{columns}
 \end{frame}
 % ---------------------------------------------------------------------
@@ -30,9 +33,9 @@ col(1..n).
   \begin{itemize}
   \item Create file \texttt{queens.lp}
   \item Define the field
-    \begin{itemize}
-    \item $n$ rows
-    \item $n$ columns
+    \begin{itemize}\normalsize
+    \item \texttt{n} rows
+    \item \texttt{n} columns
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -56,12 +59,12 @@ Time        : 0.000
   \begin{block}{\texttt{queens.lp}}
 \begin{lstlisting}
 row(1..n).
-col(1..n).
-#(\alert{\{ queen(I,J) : row(I), col(J) \}.}#)
+col(1..n).#(\pause#)
+{ queen(I,J) : row(I), col(J) }.
 \end{lstlisting}
   \end{block}
   \begin{itemize}
-  \item Guess a solution candidate
+  \item [\itarrow] Guess a solution candidate
   \item [] by placing some queens on the board
   \end{itemize}
 \end{frame}
@@ -139,12 +142,26 @@ col(1) col(2) col(3) col(4) col(5) \
 \begin{lstlisting}
 row(1..n).
 col(1..n).
-{ queen(I,J) : row(I), col(J) }.
-#(\alert{:-\only<2->{ not} \{ queen(I,J) \} \only<1>{!}= n.}#)
+{ queen(I,J) : row(I), col(J) }.#(\pause#)
+:- { queen(I,J) } != n.
 \end{lstlisting}
   \end{block}
   \begin{itemize}
-  \item Place exactly $n$ queens on the board
+  \item [\itarrow] Place exactly $n$ queens on the board
+  \end{itemize}
+\end{frame}
+% ---------------------------------------------------------------------
+\begin{frame}[fragile]{Placing $n$ queens directly}
+  \begin{block}{\texttt{queens.lp}}
+\begin{lstlisting}
+row(1..n).
+col(1..n).
+{ queen(I,J) : row(I), col(J) } = n.
+#( \ #)
+\end{lstlisting}
+  \end{block}
+  \begin{itemize}
+  \item [\itarrow] Place exactly $n$ queens on the board
   \end{itemize}
 \end{frame}
 % ---------------------------------------------------------------------
@@ -174,7 +191,8 @@ col(1) col(2) col(3) col(4) col(5) \
 Answer: 1
 row(1) row(2) row(3) row(4) row(5) \
 col(1) col(2) col(3) col(4) col(5) \
-#(\alert{queen(5,1) queen(4,1) queen(3,1) queen(2,1) queen(1,1)}#)
+#(\alert{queen(5,1) queen(4,1) queen(3,1)}#) \
+#(\alert{queen(2,1) queen(1,1)}#)
 \end{lstlisting}
     \end{columns}
   \end{block}
@@ -190,7 +208,8 @@ col(1) col(2) col(3) col(4) col(5) \
 Answer: 2
 row(1) row(2) row(3) row(4) row(5) \
 col(1) col(2) col(3) col(4) col(5) \
-#(\alert{queen(1,2) queen(4,1) queen(3,1) queen(2,1) queen(1,1)}#)
+#(\alert{queen(1,2) queen(4,1) queen(3,1)}#) \
+#(\alert{queen(2,1) queen(1,1)}#)
 \end{lstlisting}
     \end{columns}
   \end{block}
@@ -202,14 +221,13 @@ col(1) col(2) col(3) col(4) col(5) \
 row(1..n).
 col(1..n).
 { queen(I,J) : row(I), col(J) }.
-:- { queen(I,J) } != n.
-#(\alert<1>{:- queen(I,J), queen(I,J'), J != J'.}#)
-#(\uncover<2>{\alert<2>{:- queen(I,J), queen(I',J), I != I'.}}#)
+:- { queen(I,J) } != n.#(\pause#)
+:- queen(I,J), queen(I,J'), J != J'.
+:- queen(I,J), queen(I',J), I != I'.
 \end{lstlisting}
   \end{block}
   \begin{itemize}
-  \item<1-> Forbid horizontal attacks
-  \item<2-> Forbid vertical attacks
+  \item [\itarrow] Forbid horizontal and vertical attacks
   \end{itemize}
 \end{frame}
 % ---------------------------------------------------------------------
@@ -235,7 +253,8 @@ col(1) col(2) col(3) col(4) col(5) \
 Answer: 1
 row(1) row(2) row(3) row(4) row(5) \
 col(1) col(2) col(3) col(4) col(5) \
-#(\alert{queen(5,5) queen(4,4) queen(3,3) queen(2,2) queen(1,1)}#)
+#(\alert{queen(5,5) queen(4,4) queen(3,3)}#) \
+#(\alert{queen(2,2) queen(1,1)}#)
 \end{lstlisting}
     \end{columns}
   \end{block}
@@ -243,19 +262,19 @@ col(1) col(2) col(3) col(4) col(5) \
 % ---------------------------------------------------------------------
 \begin{frame}[fragile,shrink]{Diagonal attack}
   \begin{block}{\texttt{queens.lp}}
-\begin{lstlisting}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 row(1..n).
 col(1..n).
 { queen(I,J) : row(I), col(J) }.
 :- { queen(I,J) } != n.
 :- queen(I,J), queen(I,J'), J != J'.
-:- queen(I,J), queen(I',J), I != I'.
-#(\alert{:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I-J == I'-J'.}#)
-#(\alert{:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I+J == I'+J'.}#)
+:- queen(I,J), queen(I',J), I != I'.#(\pause#)
+:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I-J == I'-J'.
+:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I+J == I'+J'.
 \end{lstlisting}
   \end{block}
   \begin{itemize}
-  \item Forbid diagonal attacks
+  \item [\itarrow] Forbid diagonal attacks
   \end{itemize}
 \end{frame}
 % ---------------------------------------------------------------------
@@ -285,7 +304,8 @@ Time        : 0.000
 Answer: 1
 row(1) row(2) row(3) row(4) row(5) \
 col(1) col(2) col(3) col(4) col(5) \
-#(\alert{queen(4,5) queen(1,4) queen(3,3) queen(5,2) queen(2,1)}#)
+#(\alert{queen(4,5) queen(1,4) queen(3,3)}#) \
+#(\alert{queen(5,2) queen(2,1)}#)
 \end{lstlisting}
     \end{columns}
   \end{block}
@@ -343,22 +363,6 @@ Backjumps    : 3442   (Average: 681.19 Max: 169512 Sum: 2344658)
   Bounded    : 0      (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
 \end{semiverbatim}
 \end{frame}
-% ---------------------------------------------------------------------
-% \begin{frame}{Googling}
-%   \begin{center}\Large\em
-%     ``n queens algorithm backtracking''
-%   \end{center}
-%   \pause\bigskip
-%   \begin{itemize}
-%   \item<2-> \structure{Found:} Java program with 45 lines versus 4 lines with ASP
-%   \item<3-> Instructions how to solve the problem instead of description
-%     \begin{itemize}
-%     \item Much harder to read
-%     \item And it is slower
-%     \end{itemize}
-%   \item<4-> Demo\dots?
-%   \end{itemize}
-% \end{frame}
 % ---------------------------------------------------------------------
 %
 %%% Local Variables:
