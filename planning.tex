@@ -1,5 +1,5 @@
 % ---------------------------------------------------------------------
-\begin{frame}{Simplified STRIPS\footnote{Stanford Research Institute Problem Solver, 1971} Planning}
+\begin{frame}{Simplified STRIPS\only<1>{\footnote{Stanford Research Institute Problem Solver, 1971}} Planning}
 
   \begin{itemize}
   \item<2-> \structure{Problem Instance}
@@ -14,13 +14,21 @@
     \smallskip
   \item<3-> \structure{Example}
     \begin{itemize}
-    \item fluents       \ $\{p,q,r\}$
-    \item initial state \ $\{p\}$
+    \item fluents       \ $\{p,     q,     r\}$
+    \item initial state \ $\{p,\neg q,\neg r\}$
     \item goal state    \ $\{r\}$
     \item actions       \ $a = (\{p\},\{q,\neg p\})$ and $b = (\{q\},\{r,\neg q\})$
     \item length        \ 2
       \medskip
     \item<4-> plan      \ $\langle a, b \rangle$
+      \qquad
+      \(
+      \{     p,\neg q,\neg r\}
+      \stackrel{a}{\longrightarrow}
+      \{\neg p,     q,\neg r\}
+      \stackrel{b}{\longrightarrow}
+      \{\neg p,\neg q,     r\}
+      \)
     \end{itemize}
     \medskip
   \end{itemize}
