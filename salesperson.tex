@@ -20,14 +20,14 @@
 \end{frame}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile]{Traveling salesperson}{Problem instance, \texttt{cities.lp}}
-\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspI.lp}
+\lstinputlisting[basicstyle=\small\ttfamily]{encodings/cities.lp}
 \end{frame}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile]{Traveling salesperson}{Problem encoding, \texttt{tsp.lp}}
-\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tsp.lp}
+\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tsp-core.lp}
 %
-\only<2>{\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspWC.lp}}
-\only<3>{\lstinputlisting[basicstyle=\small\ttfamily]{encodings/tspO.lp}}
+\only<2>{\lstinputlisting[basicstyle=\small\ttfamily,linerange=3]{encodings/tsp-weak-constraint.lp}}
+\only<3>{\lstinputlisting[basicstyle=\small\ttfamily,linerange=3]{encodings/tsp-minimize.lp}}
 \end{frame}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile,shrink]{Running salesperson}
