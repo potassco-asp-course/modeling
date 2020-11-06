@@ -321,7 +321,20 @@ col(1) col(2) col(3) col(4) col(5) \
 \end{frame}
 % ---------------------------------------------------------------------
 \begin{frame}[fragile]{Optimizing}
-  \begin{block}{\texttt{queens-opt.lp}}
+  \bigskip
+  \begin{block}<only@1-2>{\texttt{queens.lp}}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+row(1..n).
+col(1..n).
+{ queen(I,J) : row(I), col(J) }.
+:- { queen(I,J) } != n.
+:- queen(I,J), queen(I,J'), J != J'.
+:- queen(I,J), queen(I',J), I != I'.
+:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I-J == I'-J'.
+:- queen(I,J), queen(I',J'), (I,J) != (I',J'), I+J == I'+J'.
+\end{lstlisting}
+  \end{block}
+  \begin{block}<only@3>{\texttt{queens-opt.lp}}
 \begin{lstlisting}
 { queen(I,1..n) } = 1 :- I = 1..n.
 { queen(1..n,J) } = 1 :- J = 1..n.
@@ -329,10 +342,12 @@ col(1) col(2) col(3) col(4) col(5) \
  :- { queen(D+J,J) } > 1, D = 1-n..n-1.
 \end{lstlisting}
   \end{block}
+  \vfill
   \begin{itemize}
-  \item Encoding can be optimized
-  \item Much faster to solve
+  \item<2-3> Encoding can be optimized
+  \item<2-3> Much faster to solve
   \end{itemize}
+  \bigskip
 \end{frame}
 % ---------------------------------------------------------------------
 \begin{frame}[fragile,shrink=1]{And sometimes it rocks}
