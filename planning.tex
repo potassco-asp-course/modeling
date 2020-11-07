@@ -35,7 +35,7 @@
 
 \end{frame}
 % ---------------------------------------------------------------------
-\begin{frame}[fragile,shrink=1]{Simplistic STRIPS Planning}
+\begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Problem instance}
 \begin{semiverbatim}
 time(1..k).
 \pause
@@ -43,7 +43,11 @@ fluent(p).     action(a).     action(b).       init(p).
 fluent(q).        pre(a,p).      pre(b,q).
 fluent(r).        add(a,q).      add(b,r).     query(r).
                   del(a,p).      del(b,q).
-\pause
+\end{semiverbatim}
+\end{frame}
+% ---------------------------------------------------------------------
+\begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Problem encoding}
+\begin{semiverbatim}
 holds(P,0) :- init(P).
 
 \{ occ(A,T) : action(A) \} = 1 :- time(T).
@@ -53,6 +57,21 @@ holds(F,T) :- occ(A,T), add(A,F).
 holds(F,T) :- holds(F,T-1), time(T), not occ(A,T) : del(A,F).
 \pause
 :- query(F), not holds(F,k).
+\end{semiverbatim}
+\end{frame}
+\begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Solving}
+\begin{semiverbatim}
+$ clingo planning-encoding.lp planning-instance.lp -c k=2 0\pause
+clingo version 5.5.0
+Reading from planning-encoding.lp ...
+Solving...
+Answer: 1
+[...] occ(a,1) occ(b,2)
+SATISFIABLE
+
+Models       : 1
+Time         : 0.001s (Solving: 0.00s)
+CPU Time     : 0.001s
 \end{semiverbatim}
 \end{frame}
 % ------------------------------------------------------------
