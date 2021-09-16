@@ -41,7 +41,7 @@ paper(p1).  reviewer(r1). classA(r1,p1). classB(r1,p2). coi(r1,p3).
 paper(p2).  reviewer(r2). classA(r2,p3). classB(r2,p4). coi(r2,p6).
 [...]
 
-\alert<2>{#count} \{ \alert<2>{P,R :} assigned(P,R) \alert<2>{,} reviewer(R) \} = 3 :-  paper(P).
+\alert<2>{#count} \{ \alert<2>{P,R :} assigned(P,R) \alert<2>{:} reviewer(R) \} = 3 :-  paper(P).
 
  :- assigned(P,R), coi(R,P).
  :- assigned(P,R), not classA(R,P), not classB(R,P).
