@@ -1,0 +1,71 @@
+% ----------------------------------------------------------------------
+\begin{frame}[c]{The traveling salesperson problem (TSP)}
+  \begin{itemize}
+  \item \structure{Problem Instance} \ A set of cities and distances among them,
+
+    or simply a weighted graph
+    \smallskip
+  \item \structure{Problem Class} \ What is the shortest possible route visiting
+
+    each city once and returning to the city of origin?
+    \bigskip
+  \item<2-> \structure{Note}
+    \begin{itemize}
+    \item TSP extends the Hamiltonian cycle problem:
+      \par
+      Is there a cycle in a graph visiting each node exactly once
+      \smallskip
+    \item TSP is relevant to applications in logistics, planning, chip design,
+
+      and the core of the vehicle routing problem
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Problem instance, \texttt{cities.lp}}
+\lstinputlisting[basicstyle=\small\ttfamily]{modeling/encodings/cities.lp}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Problem encoding, \texttt{tsp.lp}}
+\lstinputlisting[basicstyle=\small\ttfamily]{modeling/encodings/tsp-core.lp}
+%
+\only<2>{\lstinputlisting[basicstyle=\small\ttfamily,linerange=3]{modeling/encodings/tsp-weak-constraint.lp}}
+% \only<3>{\lstinputlisting[basicstyle=\small\ttfamily,linerange=3]{modeling/encodings/tsp-minimize.lp}}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile,shrink]{Running salesperson}
+\begin{lstlisting}[escapechar=!]
+$ clingo tsp.lp cities.lp!\pause!
+clingo version 5.3.1
+Reading...
+Solving...!\pause!
+Answer: 1
+start(a) [...] road(c,a,35)
+!\color{yellow}{travel(a,b) travel(b,d) travel(d,c) travel(c,a)}!
+visited(b) visited(c) visited(d) visited(a)
+Optimization: !\color{yellow}{100}!!\pause!
+Answer: 2
+start(a) [...] road(c,a,35)
+!\color{green}{travel(a,b) travel(b,c) travel(c,d) travel(d,a)}!
+visited(b) visited(c) visited(d) visited(a)
+Optimization: !\color{green}{95}!!\pause!
+OPTIMUM FOUND
+
+Models       : 2
+  Optimum    : yes
+Optimization : 95
+Calls        : 1
+Time         : 0.005s (Solving: 0.00s 1st Model: 0.00s Unsat: 0.00s)
+CPU Time     : 0.002s
+\end{lstlisting}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}[fragile]{Traveling salesperson}{Alternative problem encoding}
+\lstinputlisting[basicstyle=\small\ttfamily]{modeling/encodings/tsp-compact.lp}
+\end{frame}
+% ----------------------------------------------------------------------
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../main"
+%%% End:
