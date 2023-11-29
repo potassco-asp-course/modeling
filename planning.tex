@@ -36,21 +36,24 @@
 \end{frame}
 % ---------------------------------------------------------------------
 \begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Problem instance}
+  \bigskip
   \lstinputlisting[basicstyle=\small\ttfamily]{encodings/planning-instance.lp}
 \end{frame}
 % ---------------------------------------------------------------------
-\begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Problem encoding}
+\begin{frame}[fragile,shrink=10]{Simplistic STRIPS Planning}{Problem encoding}
+  \bigskip
   \lstinputlisting[basicstyle=\footnotesize\ttfamily,linerange=1-9]{encodings/planning-encoding.lp}
 \end{frame}
 % ----------------------------------------------------------------------
 \begin{frame}[fragile,shrink]{Simplistic STRIPS Planning}{Solving}
+  \medskip
 \begin{semiverbatim}
 $ clingo planning-encoding.lp planning-instance.lp -c k=2 0\pause
 clingo version 5.5.0
 Reading from planning-encoding.lp ...
 Solving...
 Answer: 1
-[...] occ(a,1) occ(b,2)
+[...] occurs(a,1) occurs(b,2)
 SATISFIABLE
 
 Models       : 1
