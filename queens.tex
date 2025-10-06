@@ -321,37 +321,40 @@ col(1..n).
   \mbox{\Large\texttt{\$ clingo -c n=5000 queens-opt-diag.lp --config=jumpy -q --stats=2}}
   \pause
 \begin{semiverbatim}
-clingo version 4.1.0
+clingo version 5.7.1
+Reading from queens-opt-diag.lp
 Solving...
 SATISFIABLE
 
 Models       : 1+
-Time         : 3758.143s (Solving: 1905.22s 1st Model: 1896.20s Unsat: 0.00s)
-CPU Time     : 3758.320s
+Calls        : 1
+Time         : 579.115s (Solving: 278.65s 1st Model: 278.65s Unsat: 0.00s)
+CPU Time     : 579.064s
 
-Choices      : 288594554
-Conflicts    : 3442   (Analyzed: 3442)
-Restarts     : 17     (Average: 202.47 Last: 3442)
-Model-Level  : 7594728.0
-Problems     : 1      (Average Length: 0.00 Splits: 0)
-Lemmas       : 3442   (Deleted: 0)
-  Binary     : 0      (Ratio:   0.00%)
-  Ternary    : 0      (Ratio:   0.00%)
-  Conflict   : 3442   (Average Length: 229056.5 Ratio: 100.00%)
-  Loop       : 0      (Average Length:    0.0 Ratio:   0.00%)
-  Other      : 0      (Average Length:    0.0 Ratio:   0.00%)
+Choices      : 241292786
+Conflicts    : 3329     (Analyzed: 3329)
+Restarts     : 16       (Average: 208.06 Last: 8)
+Model-Level  : 7619109.0
+Problems     : 1        (Average Length: 0.00 Splits: 0)
+Lemmas       : 3329     (Deleted: 0)
+  Binary     : 0        (Ratio:   0.00%)
+  Ternary    : 0        (Ratio:   0.00%)
+  Conflict   : 3329     (Average Length: 250553.5 Ratio: 100.00%)
+  Loop       : 0        (Average Length:    0.0 Ratio:   0.00%)
+  Other      : 0        (Average Length:    0.0 Ratio:   0.00%)
+Backjumps    : 3329     (Average: 2694.91 Max: 4317466 Sum: 8971369)
+  Executed   : 3329     (Average: 2694.91 Max: 4317466 Sum: 8971369 Ratio: 100.00%)
+  Bounded    : 0        (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
 
-Atoms        : 75084857 (Original: 75069989 Auxiliary: 14868)
-Rules        : 100129956 (1: 50059992/100090100 2: 39990/29856 3: 10000/10000)
-Bodies       : 25090103
-Equivalences : 125029999 (Atom=Atom: 50009999 Body=Body: 0 Other: 75020000)
+Rules        : 100119962 (Original: 50099988)
+  Choice     : 10000
+Atoms        : 75074862 (Original: 75059994 Auxiliary: 14868)
+Bodies       : 25054983 (Original: 49995)
+  Count      : 29856    (Original: 39990)
+Equivalences : 25030000 (Atom=Atom: 10000 Body=Body: 0 Other: 25020000)
 Tight        : Yes
 Variables    : 25024868 (Eliminated: 11781 Frozen: 25000000)
-Constraints  : 66664  (Binary: 35.6% Ternary:  0.0% Other: 64.4%)
-
-Backjumps    : 3442   (Average: 681.19 Max: 169512 Sum: 2344658)
-  Executed   : 3442   (Average: 681.19 Max: 169512 Sum: 2344658 Ratio: 100.00%)
-  Bounded    : 0      (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
+Constraints  : 66664    (Binary:  35.6% Ternary:   0.0% Other:  64.4%)
 \end{semiverbatim}
 \end{frame}
 % ---------------------------------------------------------------------
